@@ -27,7 +27,7 @@ from maxminddb.reader import Metadata
 from maxminddb.compat import byte_from_int
 
 class MMDB:
-    METADATA_BEGIN_MARKER = "\xAB\xCD\xEFMaxMind.com"
+    METADATA_BEGIN_MARKER = b"\xAB\xCD\xEFMaxMind.com"
     DATA_SECTION_SEPARATOR_SIZE = 16
 
     def __init__(self, filename):
@@ -110,7 +110,7 @@ class MMDB:
         return struct.unpack(b'!I', node_bytes)[0]
 
 if len(sys.argv) < 3:
-    print "Usage: %s <input.mmdb> <output.json>" % sys.argv[0]
+    print("Usage: %s <input.mmdb> <output.json>" % sys.argv[0])
     quit()
 
 fout = open( sys.argv[2], 'wt' )
@@ -129,14 +129,14 @@ def callback( ip, depth, data ):
 
 db = MMDB( sys.argv[1] )
 
-print "@ Dumping database ..."
+print("@ Dumping database ...")
 
 db.dump( callback )
 
 fout.write( "]" )
 fout.close()
 
-print "@ Fixing json ..."
+print("@ Fixing json ...")
 
 # remove the last comma from the file, i know this sucks
 # but it's the only way without loading every-fucking-thing
