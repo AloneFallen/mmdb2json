@@ -1,2 +1,2 @@
-netaddr==0.7.14
-maxminddb==1.2.0
+netaddr==0.7.19
+maxminddb==1.5.2
